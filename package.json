@@ -1,0 +1,71 @@
+{
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "source": [
+    "assets/js/_core.js"
+  ],
+  "targets": {
+    "default": {
+      "distDir": "../../dist",
+      "publicUrl": "/static"
+    }
+  },
+  "scripts": {
+    "start": "make clean -C ../../ && TAILWIND_MODE=watch NODE_ENV=development npm-run-all pre:twcss --parallel dev:*",
+    "lint": "npm-run-all eslint markdownlint",
+    "eslint": "eslint --fix assets/js/_*.js",
+    "markdownlint": "markdownlint --fix '**/*.md' --ignore 'node_modules'",
+    "build": "make clean -C ../../ && NODE_ENV=production npm-run-all pre:twcss --parallel prod:*",
+    "pre:twcss": "tailwindcss -i ./assets/css/_tailwind.css -o ./assets/css/index.css --jit",
+    "dev:twcssw": "tailwindcss -i ./assets/css/_tailwind.css -o ./assets/css/index.css --jit -w",
+    "dev:parcel": "parcel watch --detailed-report=10",
+    "prod:twcss": "tailwindcss -i ./assets/css/_tailwind.css -o ./assets/css/index.css --jit --minify",
+    "prod:parcel": "rm -f assets/js/index.js && parcel build --detailed-report=10 --no-cache --log-level=verbose && cp -vf ../../dist/assets/js/_core.js assets/js/index.js"
+  },
+  "dependencies": {
+    "firecracker.js": "^1.0.5"
+  },
+  "devDependencies": {
+    "@hyqo/parcel-reporter-asset-map": "^1.0.3",
+    "@parcel/bundler-default": "^2.6.2",
+    "@parcel/compressor-brotli": "^2.6.2",
+    "@parcel/compressor-gzip": "^2.6.2",
+    "@parcel/config-default": "^2.6.2",
+    "@parcel/namer-default": "^2.6.2",
+    "@parcel/optimizer-esbuild": "^2.6.2",
+    "@parcel/packager-css": "^2.6.2",
+    "@parcel/packager-html": "^2.6.2",
+    "@parcel/packager-raw": "^2.6.2",
+    "@parcel/reporter-cli": "^2.6.2",
+    "@parcel/resolver-default": "^2.6.2",
+    "@parcel/resolver-glob": "^2.6.2",
+    "@parcel/transformer-html": "^2.6.2",
+    "@parcel/transformer-js": "^2.6.2",
+    "@parcel/transformer-postcss": "^2.6.2",
+    "@parcel/transformer-raw": "^2.6.2",
+    "@parcel/transformer-vue": "^2.6.2",
+    "@tailwindcss/forms": "^0.5.2",
+    "@tailwindcss/typography": "^0.5.2",
+    "autoprefixer": "^10.4.7",
+    "cssnano": "^5.1.12",
+    "eslint-config-prettier": "^8.5.0",
+    "npm-run-all": "^4.1.5",
+    "parcel": "^2.6.2",
+    "parcel-reporter-clean-dist": "^1.0.4",
+    "parcel-resolver-ignore": "^2.1.3",
+    "postcss": "^8.4.14",
+    "postcss-cli": "^10.0.0",
+    "postcss-custom-properties": "^12.1.8",
+    "postcss-import": "^14.1.0",
+    "postcss-url": "^10.1.3",
+    "posthtml-doctype": "^1.1.1",
+    "prettier": "^2.7.1",
+    "prettier-plugin-go-template": "^0.0.13",
+    "prettier-plugin-tailwindcss": "^0.1.11",
+    "snyk": "^1.963.0",
+    "tailwindcss": "^3.1.4"
+  },
+  "parcelIgnore": [
+    "{{*.*}}",
+    "/images/*.*"
+  ]
+}
